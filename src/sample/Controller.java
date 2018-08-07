@@ -1,11 +1,13 @@
 package sample;
 
+import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class Controller {
 
     private ShiftCipher shiftCipher;
+    private int maxLength = 10;
 
     public Controller(){
         shiftCipher = new ShiftCipher();
@@ -21,7 +23,15 @@ public class Controller {
     private TextArea resultTextArea;
 
     @FXML
-    void initialize(){}
+    void initialize(){
+
+        keyTextField.textProperty().addListener((Observable x) -> {
+                if (keyTextField.getText().length() > maxLength) {
+                    String s = keyTextField.getText().substring(0, maxLength);
+                    keyTextField.setText(s);
+                }
+        });
+    }
 
     @FXML
     public void cipherButtonClicked(){

@@ -9,8 +9,8 @@
    <children>
       <Button fx:id="cipherButton" alignment="CENTER" layoutX="393.0" layoutY="73.0" mnemonicParsing="false" onMouseClicked="#cipherButtonClicked" prefHeight="22.0" prefWidth="69.0" text="encrypt" textAlignment="CENTER" />
       <TextField fx:id="keyTextField" layoutX="360.0" layoutY="39.0" prefHeight="22.0" prefWidth="134.0" />
-      <TextArea fx:id="dataTextArea" layoutX="37.0" layoutY="39.0" prefHeight="180.0" prefWidth="300.0" />
-      <TextArea fx:id="resultTextArea" layoutX="37.0" layoutY="249.0" prefHeight="180.0" prefWidth="300.0" />
+      <TextArea fx:id="dataTextArea" layoutX="37.0" layoutY="39.0" prefHeight="180.0" prefWidth="300.0" wrapText="true" />
+      <TextArea fx:id="resultTextArea" editable="false" layoutX="37.0" layoutY="249.0" prefHeight="180.0" prefWidth="300.0" wrapText="true" />
       <Button fx:id="decipherButton" alignment="CENTER" layoutX="393.0" layoutY="107.0" mnemonicParsing="false" onMouseClicked="#decipherButtonClicked" prefHeight="22.0" prefWidth="69.0" text="decrypt" textAlignment="CENTER" />
       <Text layoutX="358.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="key:" />
       <Text layoutX="37.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input:" />
