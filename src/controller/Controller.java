@@ -1,5 +1,6 @@
-package sample;
+package controller;
 
+import helper.ShiftCipher;
 import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

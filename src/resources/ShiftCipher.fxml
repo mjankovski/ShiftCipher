@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <children>
       <Button fx:id="cipherButton" alignment="CENTER" layoutX="393.0" layoutY="73.0" mnemonicParsing="false" onMouseClicked="#cipherButtonClicked" prefHeight="22.0" prefWidth="69.0" text="encrypt" textAlignment="CENTER" />
       <TextField fx:id="keyTextField" layoutX="360.0" layoutY="39.0" prefHeight="22.0" prefWidth="134.0" />
