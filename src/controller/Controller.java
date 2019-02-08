@@ -1,6 +1,7 @@
 package controller;
 
 import helper.ShiftCipher;
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -42,6 +43,21 @@ public class Controller {
     @FXML
     public void decipherButtonClicked(){
         resultTextArea.setText(shiftCipher.decrypt(dataTextArea.getText(),shiftCipher.getKeyValue(keyTextField.getText())));
+    }
+
+    @FXML
+    void openMenuItemClicked() {
+
+    }
+
+    @FXML
+    void saveMenuItemClicked() {
+
+    }
+
+    @FXML
+    void closeMenuItemClicked() {
+        Platform.exit();
     }
 
 }
