@@ -1,10 +1,15 @@
 package controller;
 
 import helper.ShiftCipher;
+
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class Controller {
 
@@ -52,7 +57,14 @@ public class Controller {
 
     @FXML
     void saveMenuItemClicked() {
+        String fileToSavePath = new FileChooser().showSaveDialog(null).toString() + ".shc";
 
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(fileToSavePath), StandardCharsets.UTF_8))) {
+            writer.write(resultTextArea.getText());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
