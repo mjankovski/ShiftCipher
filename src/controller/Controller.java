@@ -1,15 +1,14 @@
 package controller;
 
 import helper.ShiftCipher;
-
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 
 public class Controller {
@@ -74,6 +73,26 @@ public class Controller {
     @FXML
     void closeMenuItemClicked() {
         Platform.exit();
+    }
+
+    @FXML
+    void loadKeyMenuItemClicked() {
+
+    }
+
+    @FXML
+    void saveKeyMenuItemClicked() {
+        File file = new FileChooser().showSaveDialog(null);
+
+        if(file!=null) {
+            String fileToSavePath = file.toString() + ".shk";
+            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(fileToSavePath), StandardCharsets.UTF_8))) {
+                writer.write(keyTextField.getText());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
