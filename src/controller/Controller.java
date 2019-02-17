@@ -6,6 +6,7 @@ import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.stage.FileChooser;
 
 import java.io.*;
@@ -13,41 +14,66 @@ import java.nio.charset.StandardCharsets;
 
 public class Controller {
 
-    private ShiftCipher shiftCipher;
-    private int maxLength = 10;
-
     public Controller() {
         shiftCipher = new ShiftCipher();
     }
+
+    private ShiftCipher shiftCipher;
+
+    private int maxKeyLength = 10;
+
+    private File filePlace;
+
+    private String fileNameWithExtension;
 
     @FXML
     private TextField keyTextField;
 
     @FXML
-    private TextArea dataTextArea;
+    private TextArea inputTextArea;
 
     @FXML
-    private TextArea resultTextArea;
+    private TextArea outputTextArea;
 
     @FXML
     void initialize() {
 
         keyTextField.textProperty().addListener((Observable x) -> {
-            if (keyTextField.getText().length() > maxLength) {
-                String s = keyTextField.getText().substring(0, maxLength);
+            if (keyTextField.getText().length() > maxKeyLength) {
+                String s = keyTextField.getText().substring(0, maxKeyLength);
                 keyTextField.setText(s);
             }
         });
     }
 
     @FXML
-    public void cipherButtonClicked() {
-        resultTextArea.setText(shiftCipher.encrypt(dataTextArea.getText(), shiftCipher.getKeyValue(keyTextField.getText())));
+    public void encryptionButtonClicked() {
+        outputTextArea.setText(getEncryptedText());
+    }
+
+    private String getEncryptedText(){
+        String input = inputTextArea.getText();
+        int keyValue = getKeyValue();
+
+        return shiftCipher.encrypt(input, keyValue);
+    }
+
+    private int getKeyValue(){
+        String keyText = keyTextField.getText();
+
+        return shiftCipher.getKeyValue(keyText);
     }
 
     @FXML
-    public void decipherButtonClicked() {
-        resultTextArea.setText(shiftCipher.decrypt(dataTextArea.getText(), shiftCipher.getKeyValue(keyTextField.getText())));
+    public void decryptionButtonClicked() {
+        outputTextArea.setText(getDecryptedText());
+    }
+
+    private String getDecryptedText(){
+        String input = inputTextArea.getText();
+        int keyValue = getKeyValue();
+
+        return shiftCipher.decrypt(input, keyValue);
     }
 
     @FXML
@@ -57,16 +83,11 @@ public class Controller {
 
     @FXML
     void saveMenuItemClicked() {
-        File file = new FileChooser().showSaveDialog(null);
+        chooseFilePlace();
 
-        if(file!=null) {
-            String fileToSavePath = file.toString() + ".shc";
-            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(fileToSavePath), StandardCharsets.UTF_8))) {
-                writer.write(resultTextArea.getText());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if(isFilePlaceChosen()) {
+            createFileNameWithExtension("shc");
+            writeTextInputToFile(outputTextArea, fileNameWithExtension);
         }
     }
 
@@ -82,17 +103,32 @@ public class Controller {
 
     @FXML
     void saveKeyMenuItemClicked() {
-        File file = new FileChooser().showSaveDialog(null);
+        chooseFilePlace();
 
-        if(file!=null) {
-            String fileToSavePath = file.toString() + ".shk";
-            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(fileToSavePath), StandardCharsets.UTF_8))) {
-                writer.write(keyTextField.getText());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if(isFilePlaceChosen()) {
+            createFileNameWithExtension("shk");
+            writeTextInputToFile(keyTextField, fileNameWithExtension);
         }
     }
 
+    private void chooseFilePlace(){
+        filePlace = new FileChooser().showSaveDialog(null);
+    }
+
+    private boolean isFilePlaceChosen(){
+        return filePlace != null;
+    }
+
+    private void createFileNameWithExtension(String extension){
+        fileNameWithExtension = filePlace.toString() + "." + extension;
+    }
+
+    private void writeTextInputToFile(TextInputControl textInput, String file){
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(file), StandardCharsets.UTF_8))) {
+            writer.write(textInput.getText());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
