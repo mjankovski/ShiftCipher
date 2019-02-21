@@ -11,6 +11,7 @@ import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 public class Controller {
 
@@ -83,7 +84,7 @@ public class Controller {
 
     @FXML
     void saveMenuItemClicked() {
-        chooseFilePlace();
+        chooseFilePlaceToSave();
 
         if(isFilePlaceChosen()) {
             createFileNameWithExtension("shc");
@@ -98,12 +99,16 @@ public class Controller {
 
     @FXML
     void loadKeyMenuItemClicked() {
+        chooseFilePlaceToOpen();
 
+        if(isFilePlaceChosen()){
+            loadKeyFromFile();
+        }
     }
 
     @FXML
     void saveKeyMenuItemClicked() {
-        chooseFilePlace();
+        chooseFilePlaceToSave();
 
         if(isFilePlaceChosen()) {
             createFileNameWithExtension("shk");
@@ -111,7 +116,24 @@ public class Controller {
         }
     }
 
-    private void chooseFilePlace(){
+    private void loadKeyFromFile(){
+
+        String key = "";
+
+        try {
+            key = new String(Files.readAllBytes(filePlace.toPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        keyTextField.setText(key);
+    }
+
+    private void chooseFilePlaceToOpen(){
+        filePlace = new FileChooser().showOpenDialog(null);
+    }
+
+    private void chooseFilePlaceToSave(){
         filePlace = new FileChooser().showSaveDialog(null);
     }
 
