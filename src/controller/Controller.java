@@ -79,7 +79,11 @@ public class Controller {
 
     @FXML
     void openMenuItemClicked() {
-
+        chooseFilePlaceToOpen();
+    
+        if(isFilePlaceChosen()){
+            loadTextFromFile();
+        }
     }
 
     @FXML
@@ -114,6 +118,19 @@ public class Controller {
             createFileNameWithExtension("shk");
             writeTextInputToFile(keyTextField, fileNameWithExtension);
         }
+    }
+    
+    private void loadTextFromFile(){
+        
+        String text = "";
+        
+        try {
+            text = new String(Files.readAllBytes(filePlace.toPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        inputTextArea.setText(text);
     }
 
     private void loadKeyFromFile(){
