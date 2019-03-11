@@ -4,6 +4,7 @@ import helper.ShiftCipher;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
@@ -121,6 +122,11 @@ public class CipherController
         }
     }
     
+    @FXML
+    void aboutMenuItemClicked() {
+        showAlertInfo("dev: Milosz Jankowski");
+    }
+    
     private void loadTextFromFile(){
         
         String text = "";
@@ -170,5 +176,12 @@ public class CipherController
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    void showAlertInfo(String header){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About.");
+        alert.setHeaderText(header);
+        alert.showAndWait();
     }
 }
