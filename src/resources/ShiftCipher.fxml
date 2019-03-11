@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CipherController">
    <children>
       <Button fx:id="encryptionButton" alignment="CENTER" layoutX="417.0" layoutY="112.0" mnemonicParsing="false" onAction="#encryptionButtonClicked" onMouseClicked="#encryptionButtonClicked" prefHeight="22.0" prefWidth="69.0" text="encrypt" textAlignment="CENTER" />
       <TextField fx:id="keyTextField" layoutX="384.0" layoutY="68.0" prefHeight="22.0" prefWidth="134.0" />

@@ -13,9 +13,10 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
-public class Controller {
+public class CipherController
+{
 
-    public Controller() {
+    public CipherController() {
         shiftCipher = new ShiftCipher();
     }
 
