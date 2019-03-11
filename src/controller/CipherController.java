@@ -178,7 +178,7 @@ public class CipherController
         }
     }
     
-    void showAlertInfo(String header){
+    private void showAlertInfo(String header){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About.");
         alert.setHeaderText(header);
